@@ -14,7 +14,7 @@
         <AssemblyName>Soenneker.Enums.JsonOptions</AssemblyName>
         <PackageId>Soenneker.Enums.JsonOptions</PackageId>
         <PackageTags>enum json c# .net dotnet</PackageTags>
-        <Copyright>Copyright © 2024 Jake Soenneker</Copyright>
+        <Copyright>Copyright © 2023-2024 Jake Soenneker</Copyright>
         <Authors>Jake Soenneker</Authors>
         <Company>https://soenneker.com</Company>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
