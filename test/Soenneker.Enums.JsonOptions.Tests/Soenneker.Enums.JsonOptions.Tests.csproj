@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\src\Soenneker.Enums.JsonOptions.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Enums.JsonOptions.csproj" />
     </ItemGroup>
 
 </Project>
