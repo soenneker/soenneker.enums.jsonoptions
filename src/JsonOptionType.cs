@@ -1,11 +1,11 @@
-﻿using Intellenum;
+﻿using Soenneker.Gen.EnumValues;
 
 namespace Soenneker.Enums.JsonOptions;
 
 /// <summary>
 /// Represents different JSON option types.
 /// </summary>
-[Intellenum<int>]
+[EnumValue]
 public sealed partial class JsonOptionType
 {
     /// <summary>
