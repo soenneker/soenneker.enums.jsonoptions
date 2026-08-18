@@ -3,29 +3,29 @@
 namespace Soenneker.Enums.JsonOptions;
 
 /// <summary>
-/// Represents different JSON option types.
+/// Identifies a predefined JSON serialization profile.
 /// </summary>
 [EnumValue]
 public sealed partial class JsonOptionType
 {
     /// <summary>
-    /// Web defaults, non-strict
+    /// Web-oriented defaults, including camel-case property names and permissive input handling.
     /// </summary>
     public static readonly JsonOptionType Web = new(0);
 
     /// <summary>
-    /// Non-camel case
+    /// General-purpose serialization without camel-case property-name conversion.
     /// </summary>
     public static readonly JsonOptionType General = new(1);
 
     /// <summary>
-    /// Non-camel case with indentation WITHOUT escaping. WARNING Dangerous! Do not use unless for internal uses!
+    /// Indented, non-camel-case output with relaxed character escaping. Use only for trusted internal content.
     /// </summary>
     /// <remarks>https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-character-encoding</remarks>
     public static readonly JsonOptionType Pretty = new(2);
 
     /// <summary>
-    /// Non-camel case with indentation, WITH escaping. Safe for output.
+    /// Indented, non-camel-case output with standard safe character escaping.
     /// </summary>
     /// <remarks>https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-character-encoding</remarks>
     public static readonly JsonOptionType PrettySafe = new(3);
