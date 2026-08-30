@@ -5,7 +5,7 @@
 
 # Soenneker.Enums.JsonOptions
 
-Identifies a predefined JSON serialization profile.
+An integer-backed enum-value type for selecting one of the JSON profiles used by Soenneker JSON utilities.
 
 ## Install
 
@@ -13,20 +13,29 @@ Identifies a predefined JSON serialization profile.
 dotnet add package Soenneker.Enums.JsonOptions
 ```
 
-## What you get
+## Usage
 
-- `JsonOptionType` — Identifies a predefined JSON serialization profile.
+```csharp
+using Soenneker.Enums.JsonOptions;
 
-## API at a glance
+JsonOptionType profile = JsonOptionType.PrettySafe;
+int value = profile.Value; // 3
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `JsonOptionType.Web` | Web-oriented defaults, including camel-case property names and permissive input handling. | Web-oriented defaults, including camel-case property names and permissive input handling. |
-| `JsonOptionType.General` | General-purpose serialization without camel-case property-name conversion. | General-purpose serialization without camel-case property-name conversion. |
-| `JsonOptionType.Pretty` | Indented, non-camel-case output with relaxed character escaping. Use only for trusted internal content. | https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-character-encoding. |
-| `JsonOptionType.PrettySafe` | Indented, non-camel-case output with standard safe character escaping. | https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-character-encoding. |
+if (JsonOptionType.TryFromValue(configuredValue, out JsonOptionType? parsed))
+{
+    profile = parsed;
+}
+```
 
-## Important behavior
+| Value | Numeric value | Intended profile |
+| --- | ---: | --- |
+| `Web` | `0` | Compact web defaults with camel-case property names |
+| `General` | `1` | Compact general defaults without camel-case conversion |
+| `Pretty` | `2` | Indented general output with relaxed escaping |
+| `PrettySafe` | `3` | Indented general output with standard escaping |
 
-- `JsonOptionType.Pretty`: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-character-encoding.
-- `JsonOptionType.PrettySafe`: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-character-encoding.
+The generated `System.Text.Json` converter writes the numeric value and accepts only defined values when reading. `FromValue` throws for an unknown integer; use `TryFromValue` at configuration or request boundaries. `FromName` and `TryFromName` use the C# member names.
+
+This package supplies profile identifiers, not `JsonSerializerOptions`. The component receiving the value defines the concrete settings; in the Soenneker options collection these profiles also differ in null handling, comment handling, and enum converters.
+
+Do not use `Pretty` for JSON that will be embedded in HTML or otherwise cross an untrusted output boundary: its relaxed encoder allows characters that the default encoder escapes. `PrettySafe` keeps standard escaping, but output-context encoding is still the caller's responsibility.
